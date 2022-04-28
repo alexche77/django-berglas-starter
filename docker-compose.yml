@@ -1,0 +1,13 @@
+services:
+  api:
+    build:
+      context: .
+      target: builder
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
+    command: /bin/berglas exec -- python src/manage.py runserver ${HOST:-0.0.0.0}:${PORT:-8000}
+    volumes:
+      - $HOME/.config/gcloud:/config
+      - ./app:/usr/src/app
